@@ -14,3 +14,16 @@ header.container_header {
     align-items: center;
     column-gap: 0.5em;
 }
+
+.query-container {
+    display: flex;
+    place-content: center;
+    grid-column-gap: 0.5em;
+    column-gap: 0.5em;
+    padding: 0.5em;
+}
+
+.table-container {
+    display: flex;
+    justify-content: flex-end;
+}

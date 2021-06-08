@@ -11,6 +11,7 @@ import {ButtonModule} from 'primeng/button';
 import { StudentComponent } from './student/student.component';
 import { AddStudentComponent } from './add-student/add-student.component';
 import { HomeComponent } from './home/home.component';
+import {TableModule} from 'primeng/table';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +26,8 @@ import { HomeComponent } from './home/home.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     InputTextModule,
-    ButtonModule
+    ButtonModule,
+    TableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
