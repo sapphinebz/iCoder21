@@ -12,6 +12,10 @@ import { StudentComponent } from './student/student.component';
 import { AddStudentComponent } from './add-student/add-student.component';
 import { HomeComponent } from './home/home.component';
 import {TableModule} from 'primeng/table';
+import { HttpClientModule } from '@angular/common/http';
+import { PokemonComponent } from './pokemon/pokemon.component';
+import {ToastModule} from 'primeng/toast';
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,7 +23,8 @@ import {TableModule} from 'primeng/table';
     Ma4jay3Component,
     StudentComponent,
     AddStudentComponent,
-    HomeComponent
+    HomeComponent,
+    PokemonComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +32,10 @@ import {TableModule} from 'primeng/table';
     BrowserAnimationsModule,
     InputTextModule,
     ButtonModule,
-    TableModule
+    TableModule,
+    HttpClientModule,
+    ToastModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

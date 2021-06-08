@@ -1,1 +1,23 @@
-<p>add-student works!</p>
+
+<p-toast></p-toast>
+<div [formGroup]="addStudentFormGroup" class="student-form">
+  <div>
+    <span> ชื่อ: </span>
+    <input type="text" formControlName="name" pInputText />
+  </div>
+
+  <div>
+    <span>อีเมล: </span>
+    <input type="text" formControlName="email"  pInputText />
+  </div>
+
+  <div>
+    <span>โทรศัพท์: </span>
+    <input type="text" formControlName="tel" pInputText />
+  </div>
+
+  <div class="query-container">
+      <p-button label="บันทึก" (onClick)="saveStudent()"></p-button>
+      <p-button label="ย้อนกลับ" ></p-button>
+  </div>
+</div>

@@ -1,26 +1,29 @@
 <div class="query-container">
   <div>
     <span>ชื่อ :</span>
-    <input type="text" pInputText />
+    <input [formControl]="nameFormControl" type="text" pInputText />
   </div>
   <div>
     <span>อีเมล :</span>
-    <input type="text" pInputText />
+    <input [formControl]="emailFormControl" type="text" pInputText />
   </div>
   <div>
     <span>โทรศัพท์ :</span>
-    <input type="text" pInputText />
+    <input [formControl]="telFormControl" type="text" pInputText />
   </div>
 </div>
 <div class="query-container">
-  <p-button label="ค้นหา"></p-button>
-  <p-button label="ยกเลิก"></p-button>
+  <p-button label="ค้นหา" (onClick)="queryStudent()"></p-button>
+  <p-button label="ยกเลิก" (onClick)="clearStudent()"></p-button>
 </div>
 <div class="table-container">
-  <p-button label="เพิ่ม" icon="pi pi-plus-circle"></p-button>
+  <p-button label="เพิ่ม" 
+  [routerLink]="['/add']"
+  icon="pi pi-plus-circle">
+</p-button>
 </div>
 <div>
-  <p-table [value]="students"
+  <p-table [value]="studentModels"
    [paginator]="true" [rows]="5"
   >
     <ng-template pTemplate="header">
