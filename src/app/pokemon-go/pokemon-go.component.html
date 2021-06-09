@@ -13,11 +13,13 @@
   [options]="pokemonDataList"
   placeholder="Select a Pokemon"
   optionLabel="name"
-  
+  [formControl]="pokemonFormControl"
   (onChange)="selectedPokemon($event)"
   [showClear]="true"
 >
 </p-dropdown>
+
+<!-- {{pokemonFormControl.value | json}} -->
 
 <span *ngFor="let imageUrl of image_sprites">
     <img 
@@ -32,4 +34,5 @@
         {{abi}}
   </div>
 
+  <p-button label="บันทึก" (onClick)="savePokemon()"></p-button>
   

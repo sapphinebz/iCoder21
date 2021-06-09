@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { AppComponent } from '../app.component';
 import { ResponseAddStudent, ResponseEditStudent } from '../student';
+import { StudentService } from '../student.service';
 
 @Component({
   selector: 'app-edit-student',
@@ -34,7 +35,8 @@ export class EditStudentComponent implements OnInit {
     private messageService: MessageService,
     private router: Router,
     private route: ActivatedRoute,
-    private appComponent: AppComponent
+    private appComponent: AppComponent,
+    private studentService: StudentService
   ) {
     const student = this.appComponent.editStudent;
     if (student) {
@@ -53,7 +55,7 @@ export class EditStudentComponent implements OnInit {
     const student = this.editStudentFormGroup.value;
     // {name:'', tel:'', email:''}
 
-    this.http.put<ResponseEditStudent>('/training-demo/student', student).subscribe(
+    this.studentService.editStudent(student).subscribe(
       (response) => {
         this.messageService.add({
           severity: 'success',

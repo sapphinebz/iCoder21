@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { ResponseAddStudent } from '../student';
+import { StudentService } from '../student.service';
 
 @Component({
   selector: 'app-add-student',
@@ -27,7 +28,8 @@ export class AddStudentComponent implements OnInit {
   constructor(
     private http: HttpClient, 
     private messageService: MessageService,
-    private router:Router
+    private router:Router,
+    private studentService: StudentService
     ) {}
 
   ngOnInit(): void {}
@@ -37,7 +39,7 @@ export class AddStudentComponent implements OnInit {
     const student = this.addStudentFormGroup.value;
     // {name:'', tel:'', email:''}
 
-    this.http.post<ResponseAddStudent>('/training-demo/student', student)
+    this.studentService.addStudent(student)
     .subscribe(response=>{
       this.messageService.add({severity:'success', summary: 'Success', detail: 'บันทึกสำเร็จแล้วววว'});
       // this.router.navigateByUrl('/student');

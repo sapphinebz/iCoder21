@@ -6,6 +6,7 @@ import { MessageService } from 'primeng/api';
 import { EMPTY } from 'rxjs';
 import { AppComponent } from '../app.component';
 import { ResponseStudentAll, Student, StudentAllCondition, StudentModel } from '../student';
+import { StudentService } from '../student.service';
 
 @Component({
   selector: 'app-student',
@@ -69,7 +70,8 @@ export class StudentComponent implements OnInit {
   constructor(private http: HttpClient,   
     private messageService: MessageService,
     private router: Router,
-    private appComponent: AppComponent
+    private appComponent: AppComponent,
+    private studentService: StudentService
     ) { 
 
   
@@ -111,14 +113,9 @@ export class StudentComponent implements OnInit {
     }
 
     //condition =  {name: '123', email:'12312', tel:'3123123'}
-    
-    const httpParams = new HttpParams({fromObject:(condition as any)});
-    // ?name=123&email=12312&tel=3123123
-    this.http.get<ResponseStudentAll>('/training-demo/student/all',{
-      params: httpParams
-    })
+
+    this.studentService.getStudentAll(condition)
     .subscribe(
-      
       response=>{
           this.studentModels = response.result
       },
@@ -140,7 +137,7 @@ export class StudentComponent implements OnInit {
 
   deleteStudent(student: StudentModel){
     // this.http.delete('/training-demo/student/'+student.id);
-    this.http.delete(`/training-demo/student/${student.id}`)
+    this.studentService.deleteStudent(student.id)
     .subscribe(response=>{
       this.messageService
       .add({severity:'success',

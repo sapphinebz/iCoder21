@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Pokemon, PokemonData, PokemonResponse } from '../pokemon';
+import { PokemonService } from '../pokemon.service';
 
 @Component({
   selector: 'app-pokemon-go',
@@ -11,12 +12,17 @@ import { Pokemon, PokemonData, PokemonResponse } from '../pokemon';
 export class PokemonGoComponent implements OnInit {
   // cities: any[] = [];
   pokemonDataList: PokemonData[] = [];
+
+  pokemonFormControl = new FormControl();
+
+  nest_pokemon$ = this.http.get('/training-demo/pokemon/all');
+
   // cityFormControl = new FormControl();
   image_sprites: string[] = [];
 
   abilities: string[] = [];
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,private pokemonService: PokemonService) {
     // this.cities = [
     //   { name: 'New York', code: 'NY' },
     //   { name: 'Rome', code: 'RM' },
@@ -25,13 +31,22 @@ export class PokemonGoComponent implements OnInit {
     //   { name: 'Paris', code: 'PRS' },
     // ];
 
-    this.http
-      .get<PokemonResponse>(
-        'https://pokeapi.co/api/v2/pokemon?limit=100&offset=200'
-      )
+    this.pokemonService.getPokemonAll()
       .subscribe((response) => {
         this.pokemonDataList = response.results;
       });
+
+      this.nest_pokemon$.subscribe(val=>console.log(val));
+  }
+
+  savePokemon(){
+    const pokemon = this.pokemonFormControl.value;
+    const payload: {name?:string} = {};
+    payload.name = pokemon.name;
+
+    // this.http.post('.....',payload).subscribe(response=>{
+
+    // })
   }
 
   ngOnInit(): void {}

@@ -23,6 +23,7 @@ import { EditStudentComponent } from './edit-student/edit-student.component';
 import {CalendarModule} from 'primeng/calendar';
 import { PokemonGoComponent } from './pokemon-go/pokemon-go.component';
 import {DropdownModule} from 'primeng/dropdown';
+import { StatusPipe } from './status.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,6 +36,7 @@ import {DropdownModule} from 'primeng/dropdown';
     NotfoundComponent,
     EditStudentComponent,
     PokemonGoComponent,
+    StatusPipe,
   ],
   imports: [
     BrowserModule,
