@@ -32,3 +32,36 @@ export interface StudentAllCondition {
   email?: string;
   tel?: string;
 }
+
+export interface ResponseAddStudent {
+  result: ResultAddStudent;
+}
+
+export interface ResultAddStudent {
+  createBy?: any;
+  createDate?: any;
+  email: string;
+  id: number;
+  name: string;
+  tel: string;
+  updateBy?: any;
+  updateDate?: any;
+  version: number;
+}
+
+
+export interface ResponseEditStudent {
+  result: ResultEditStudent;
+}
+
+export interface ResultEditStudent {
+  createBy?: any;
+  createDate?: any;
+  email: string;
+  id: number;
+  name: string;
+  tel: string;
+  updateBy?: any;
+  updateDate?: any;
+  version: number;
+}

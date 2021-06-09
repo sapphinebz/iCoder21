@@ -44,3 +44,7 @@ img.clickable-img {
     place-items: center;
     row-gap: 0.5em;
 }
+
+th.p-table-button {
+    width: 10%;
+}

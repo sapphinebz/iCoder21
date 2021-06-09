@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { MessageService } from 'primeng/api';
+import { StudentModel } from './student';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
+  providers: [MessageService]
 })
 export class AppComponent implements OnInit {
   employee = {
@@ -13,6 +16,8 @@ export class AppComponent implements OnInit {
   fiveBahtList = [4, 10,8,20,50];
   oneBahtList: number[] = [];
   summary = 0;
+
+  editStudent: StudentModel| null = null;
 
 
 

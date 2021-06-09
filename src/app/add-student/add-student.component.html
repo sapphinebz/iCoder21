@@ -1,23 +1,29 @@
 
-<p-toast></p-toast>
+
 <div [formGroup]="addStudentFormGroup" class="student-form">
   <div>
     <span> ชื่อ: </span>
-    <input type="text" formControlName="name" pInputText />
+    <input type="text" [formControlName]="'name'" pInputText />
+    <p-message *ngIf="nameFormControl.dirty && nameFormControl.invalid" severity="error" text="Field is required"></p-message>
   </div>
 
   <div>
     <span>อีเมล: </span>
-    <input type="text" formControlName="email"  pInputText />
+    <input type="text" [formControlName]="'email'"  pInputText />
+    <p-message *ngIf="emailFormControl.hasError('required') &&emailFormControl.dirty && emailFormControl.invalid" severity="error" text="Field is required"></p-message>
+    <p-message *ngIf="emailFormControl.hasError('email') && emailFormControl.dirty && emailFormControl.invalid" severity="error" text="Invalid email"></p-message>
+
   </div>
 
   <div>
     <span>โทรศัพท์: </span>
-    <input type="text" formControlName="tel" pInputText />
+    <input type="text" [formControlName]="'tel'" pInputText />
+    <p-message *ngIf="telFormControl.dirty && telFormControl.invalid" severity="error" text="Field is required"></p-message>
   </div>
 
   <div class="query-container">
-      <p-button label="บันทึก" (onClick)="saveStudent()"></p-button>
-      <p-button label="ย้อนกลับ" ></p-button>
+      <p-button [disabled]="addStudentFormGroup.invalid" label="บันทึก" (onClick)="saveStudent()"></p-button>
+      <p-button label="ล้างค่า" (onClick)="resetStudent()"></p-button>
+      <p-button label="ย้อนกลับ" [routerLink]="['/student']"></p-button>
   </div>
 </div>

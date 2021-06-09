@@ -1,34 +1,52 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { ResponseAddStudent } from '../student';
 
 @Component({
   selector: 'app-add-student',
   templateUrl: './add-student.component.html',
   styleUrls: ['./add-student.component.css'],
-  providers: [MessageService]
+
 })
 export class AddStudentComponent implements OnInit {
   // emailFormControl = new FormControl();
+
+  emailFormControl = new FormControl(null, [Validators.required, Validators.email]);
+  nameFormControl = new FormControl(null,Validators.required);
+  telFormControl = new FormControl(null,Validators.required)
+
   addStudentFormGroup = new FormGroup({
-    email: new FormControl(),
-    name: new FormControl(),
-    tel: new FormControl(),
+    email: this.emailFormControl,
+    name: this.nameFormControl,
+    tel: this.telFormControl,
   });
 
-  constructor(private http: HttpClient,private messageService: MessageService) {}
+  constructor(
+    private http: HttpClient, 
+    private messageService: MessageService,
+    private router:Router
+    ) {}
 
   ngOnInit(): void {}
 
   saveStudent() {
     // console.log(this.addStudentFormGroup.value)
     const student = this.addStudentFormGroup.value;
+    // {name:'', tel:'', email:''}
 
-    this.http.post('/training-demo/student', student)
+    this.http.post<ResponseAddStudent>('/training-demo/student', student)
     .subscribe(response=>{
-      // console.log('บันทึกสำเร็จ')
-      this.messageService.add({severity:'success', summary: 'Success', detail: 'Message Content'});
+      this.messageService.add({severity:'success', summary: 'Success', detail: 'บันทึกสำเร็จแล้วววว'});
+      // this.router.navigateByUrl('/student');
+      this.router.navigate(['/student']);
+
     })
+  }
+
+  resetStudent(){
+    this.addStudentFormGroup.reset();
   }
 }

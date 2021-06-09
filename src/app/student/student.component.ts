@@ -1,6 +1,10 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
+import { EMPTY } from 'rxjs';
+import { AppComponent } from '../app.component';
 import { ResponseStudentAll, Student, StudentAllCondition, StudentModel } from '../student';
 
 @Component({
@@ -62,7 +66,11 @@ export class StudentComponent implements OnInit {
 
   
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient,   
+    private messageService: MessageService,
+    private router: Router,
+    private appComponent: AppComponent
+    ) { 
 
   
   }
@@ -109,11 +117,50 @@ export class StudentComponent implements OnInit {
     this.http.get<ResponseStudentAll>('/training-demo/student/all',{
       params: httpParams
     })
-    .subscribe(response=>{
-      this.studentModels = response.result
-    });
+    .subscribe(
+      
+      response=>{
+          this.studentModels = response.result
+      },
+      (error: HttpErrorResponse)=>{
+        this.messageService
+        .add({
+          severity:'error', 
+          summary: 'Error', 
+          detail: error.statusText
+        });
+
+        this.studentModels =[];
+      }
+    ); 
+
+    
+  
   }
 
+  deleteStudent(student: StudentModel){
+    // this.http.delete('/training-demo/student/'+student.id);
+    this.http.delete(`/training-demo/student/${student.id}`)
+    .subscribe(response=>{
+      this.messageService
+      .add({severity:'success',
+       summary: 'Success', 
+      detail: 'ลบสำเร็จแล้วววว'});
+
+      const index = this.studentModels
+      .findIndex(model=>model.id===student.id)
+      
+      if(index>=0){
+        this.studentModels.splice(index,1);
+      }
+      // this.queryStudent();
+    })
+  }
+
+  editStudent(student: StudentModel){
+    this.appComponent.editStudent = student;
+    this.router.navigate(['/edit'])
+  }
  
 
 }

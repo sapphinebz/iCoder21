@@ -5,17 +5,24 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ActionBarComponent } from './action-bar/action-bar.component';
 import { Ma4jay3Component } from './ma4jay3/ma4jay3.component';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {InputTextModule} from 'primeng/inputtext';
-import {ButtonModule} from 'primeng/button';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
 import { StudentComponent } from './student/student.component';
 import { AddStudentComponent } from './add-student/add-student.component';
 import { HomeComponent } from './home/home.component';
-import {TableModule} from 'primeng/table';
+import { TableModule } from 'primeng/table';
 import { HttpClientModule } from '@angular/common/http';
 import { PokemonComponent } from './pokemon/pokemon.component';
-import {ToastModule} from 'primeng/toast';
+import { ToastModule } from 'primeng/toast';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NotfoundComponent } from './notfound/notfound.component';
+import { MessagesModule } from 'primeng/messages';
+import { MessageModule } from 'primeng/message';
+import { EditStudentComponent } from './edit-student/edit-student.component';
+import {CalendarModule} from 'primeng/calendar';
+import { PokemonGoComponent } from './pokemon-go/pokemon-go.component';
+import {DropdownModule} from 'primeng/dropdown';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +31,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     StudentComponent,
     AddStudentComponent,
     HomeComponent,
-    PokemonComponent
+    PokemonComponent,
+    NotfoundComponent,
+    EditStudentComponent,
+    PokemonGoComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,9 +45,13 @@ import { ReactiveFormsModule } from '@angular/forms';
     TableModule,
     HttpClientModule,
     ToastModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MessagesModule,
+    MessageModule,
+    CalendarModule,
+    DropdownModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
